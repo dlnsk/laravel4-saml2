@@ -5,6 +5,7 @@ use Config;
 use Route;
 use URL;
 use Illuminate\Support\ServiceProvider;
+use OneLogin_Saml2_Utils;
 
 class Saml2ServiceProvider extends ServiceProvider
 {
@@ -31,6 +32,11 @@ class Saml2ServiceProvider extends ServiceProvider
             $samlSettings['lavarel']['useRoutes']
         ) {
             include __DIR__ . '/../../routes.php';
+        }
+
+        if (isset($samlSettings['lavarel']['proxyVars']) 
+                && $samlSettings['lavarel']['proxyVars']) {
+            OneLogin_Saml2_Utils::setProxyVars(true);
         }
     }
 
